@@ -1,6 +1,6 @@
 # Kotlin Android Todo Application Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Build a complete, production-grade Android Todo application in Kotlin using Jetpack Compose (Material 3), Room SQLite persistence, and MVVM Unidirectional Data Flow.
 
@@ -39,7 +39,7 @@
 **Interfaces:**
 - Produces: Complete Gradle and Android application module structure configured for Kotlin, Jetpack Compose, Room, and KSP.
 
-- [ ] **Step 1: Create Version Catalog (`gradle/libs.versions.toml`)**
+- [x] **Step 1: Create Version Catalog (`gradle/libs.versions.toml`)**
 
 ```toml
 [versions]
@@ -86,7 +86,7 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ```
 
-- [ ] **Step 2: Create root Gradle files (`settings.gradle.kts`, `build.gradle.kts`, `gradle.properties`)**
+- [x] **Step 2: Create root Gradle files (`settings.gradle.kts`, `build.gradle.kts`, `gradle.properties`)**
 
 In `settings.gradle.kts`:
 ```kotlin
@@ -136,7 +136,7 @@ zipStoreBase=GRADLE_USER_HOME
 zipStorePath=wrapper/dists
 ```
 
-- [ ] **Step 3: Create `app/build.gradle.kts`, `app/proguard-rules.pro`, and Android Manifest & resources**
+- [x] **Step 3: Create `app/build.gradle.kts`, `app/proguard-rules.pro`, and Android Manifest & resources**
 
 In `app/build.gradle.kts`:
 ```kotlin
@@ -255,7 +255,7 @@ In `app/proguard-rules.pro`:
 # Proguard rules for TodoApp
 ```
 
-- [ ] **Step 4: Commit build scaffolding**
+- [x] **Step 4: Commit build scaffolding**
 
 ```bash
 git add settings.gradle.kts build.gradle.kts gradle.properties gradle/ app/
@@ -274,7 +274,7 @@ git commit -m "build: scaffold Android project with Gradle, Jetpack Compose, Roo
 **Interfaces:**
 - Produces: `enum class Priority { LOW, MEDIUM, HIGH }` and `data class TodoItem(id: Long, title: String, description: String, priority: Priority, isCompleted: Boolean, createdAt: Long)`
 
-- [ ] **Step 1: Write the failing unit test for Priority & TodoItem**
+- [x] **Step 1: Write the failing unit test for Priority & TodoItem**
 
 Create `app/src/test/java/com/example/todo/domain/PriorityTest.kt`:
 ```kotlin
@@ -316,7 +316,7 @@ class PriorityTest {
 }
 ```
 
-- [ ] **Step 2: Implement `Priority.kt` and `TodoItem.kt`**
+- [x] **Step 2: Implement `Priority.kt` and `TodoItem.kt`**
 
 Create `app/src/main/java/com/example/todo/domain/model/Priority.kt`:
 ```kotlin
@@ -349,7 +349,7 @@ data class TodoItem(
 )
 ```
 
-- [ ] **Step 3: Run the unit test to verify it passes**
+- [x] **Step 3: Run the unit test to verify it passes**
 
 Commit domain models:
 ```bash
@@ -373,7 +373,7 @@ git commit -m "feat: add Priority enum and TodoItem domain model with unit tests
 - Consumes: `Priority`, `TodoItem`
 - Produces: `TodoEntity`, `TodoDao`, `TodoDatabase`, `TodoEntity.toDomain(): TodoItem`, `TodoItem.toEntity(): TodoEntity`
 
-- [ ] **Step 1: Write the failing unit test for TodoMapper & PriorityConverters**
+- [x] **Step 1: Write the failing unit test for TodoMapper & PriorityConverters**
 
 Create `app/src/test/java/com/example/todo/data/TodoMapperTest.kt`:
 ```kotlin
@@ -427,7 +427,7 @@ class TodoMapperTest {
 }
 ```
 
-- [ ] **Step 2: Implement Converters, Entity, DAO, Database & Mapper**
+- [x] **Step 2: Implement Converters, Entity, DAO, Database & Mapper**
 
 Create `app/src/main/java/com/example/todo/data/local/PriorityConverters.kt`:
 ```kotlin
@@ -561,9 +561,9 @@ fun TodoItem.toEntity(): TodoEntity = TodoEntity(
 )
 ```
 
-- [ ] **Step 3: Run the unit test to verify mapping logic**
+- [x] **Step 3: Run the unit test to verify mapping logic**
 
-- [ ] **Step 4: Commit Room persistence components**
+- [x] **Step 4: Commit Room persistence components**
 
 ```bash
 git add app/src/main/java/com/example/todo/data/ app/src/test/java/com/example/todo/data/
@@ -584,7 +584,7 @@ git commit -m "feat: add Room DAO, Entity, Database, and Entity-to-Domain mapper
 - Consumes: `TodoDao`, `TodoItem`, `TodoEntity`, `toDomain()`, `toEntity()`
 - Produces: `TodoRepository` interface with `getTodos(): Flow<List<TodoItem>>`, `addTodo(item: TodoItem): Long`, `updateTodo(item: TodoItem)`, `deleteTodo(item: TodoItem)`, `toggleComplete(item: TodoItem)`, `clearCompleted()`
 
-- [ ] **Step 1: Write `FakeTodoDao.kt` and failing repository unit test**
+- [x] **Step 1: Write `FakeTodoDao.kt` and failing repository unit test**
 
 Create `app/src/test/java/com/example/todo/data/FakeTodoDao.kt`:
 ```kotlin
@@ -703,7 +703,7 @@ class TodoRepositoryTest {
 }
 ```
 
-- [ ] **Step 2: Implement `TodoRepository.kt` and `TodoRepositoryImpl.kt`**
+- [x] **Step 2: Implement `TodoRepository.kt` and `TodoRepositoryImpl.kt`**
 
 Create `app/src/main/java/com/example/todo/data/repository/TodoRepository.kt`:
 ```kotlin
@@ -770,9 +770,9 @@ class TodoRepositoryImpl(
 }
 ```
 
-- [ ] **Step 3: Run repository test to verify passes**
+- [x] **Step 3: Run repository test to verify passes**
 
-- [ ] **Step 4: Commit repository layer**
+- [x] **Step 4: Commit repository layer**
 
 ```bash
 git add app/src/main/java/com/example/todo/data/repository/ app/src/test/java/com/example/todo/data/
@@ -793,7 +793,7 @@ git commit -m "feat: implement TodoRepository with Flow streaming and unit tests
 - Consumes: `TodoRepository`, `TodoItem`, `Priority`
 - Produces: `TodoUiState`, `TodoFilter` (`ALL`, `ACTIVE`, `COMPLETED`), `TodoViewModel` with `uiState: StateFlow<TodoUiState>` and interaction methods.
 
-- [ ] **Step 1: Write `FakeTodoRepository.kt` and `TodoViewModelTest.kt`**
+- [x] **Step 1: Write `FakeTodoRepository.kt` and `TodoViewModelTest.kt`**
 
 Create `app/src/test/java/com/example/todo/data/FakeTodoRepository.kt`:
 ```kotlin
@@ -981,7 +981,7 @@ class TodoViewModelTest {
 }
 ```
 
-- [ ] **Step 2: Implement `TodoUiState.kt` and `TodoViewModel.kt`**
+- [x] **Step 2: Implement `TodoUiState.kt` and `TodoViewModel.kt`**
 
 Create `app/src/main/java/com/example/todo/ui/screens/TodoUiState.kt`:
 ```kotlin
@@ -1146,9 +1146,9 @@ class TodoViewModel(
 }
 ```
 
-- [ ] **Step 3: Run the unit test to verify ViewModel logic**
+- [x] **Step 3: Run the unit test to verify ViewModel logic**
 
-- [ ] **Step 4: Commit ViewModel and UI state layer**
+- [x] **Step 4: Commit ViewModel and UI state layer**
 
 ```bash
 git add app/src/main/java/com/example/todo/ui/ app/src/test/java/com/example/todo/ui/
@@ -1173,7 +1173,7 @@ git commit -m "feat: add TodoViewModel, TodoUiState, and comprehensive unit test
 - Consumes: `TodoItem`, `Priority`, `TodoFilter`, Material 3 Compose
 - Produces: Visual components with animations, priority color coding, strike-through text on complete, and bottom sheet entry.
 
-- [ ] **Step 1: Implement Theme files (`Color.kt`, `Type.kt`, `Theme.kt`)**
+- [x] **Step 1: Implement Theme files (`Color.kt`, `Type.kt`, `Theme.kt`)**
 
 Create `app/src/main/java/com/example/todo/ui/theme/Color.kt`:
 ```kotlin
@@ -1256,7 +1256,7 @@ fun TodoAppTheme(
 }
 ```
 
-- [ ] **Step 2: Implement `PriorityBadge.kt`**
+- [x] **Step 2: Implement `PriorityBadge.kt`**
 
 Create `app/src/main/java/com/example/todo/ui/components/PriorityBadge.kt`:
 ```kotlin
@@ -1305,7 +1305,7 @@ fun PriorityBadge(priority: Priority, modifier: Modifier = Modifier) {
 }
 ```
 
-- [ ] **Step 3: Implement `FilterChipRow.kt` and `TodoEmptyState.kt`**
+- [x] **Step 3: Implement `FilterChipRow.kt` and `TodoEmptyState.kt`**
 
 Create `app/src/main/java/com/example/todo/ui/components/FilterChipRow.kt`:
 ```kotlin
@@ -1413,7 +1413,7 @@ fun TodoEmptyState(
 }
 ```
 
-- [ ] **Step 4: Implement `TodoItemCard.kt` and `AddTodoBottomSheet.kt`**
+- [x] **Step 4: Implement `TodoItemCard.kt` and `AddTodoBottomSheet.kt`**
 
 Create `app/src/main/java/com/example/todo/ui/components/TodoItemCard.kt`:
 ```kotlin
@@ -1651,7 +1651,7 @@ fun AddTodoBottomSheet(
 }
 ```
 
-- [ ] **Step 5: Commit UI components**
+- [x] **Step 5: Commit UI components**
 
 ```bash
 git add app/src/main/java/com/example/todo/ui/components/ app/src/main/java/com/example/todo/ui/theme/
@@ -1671,7 +1671,7 @@ git commit -m "feat: implement Material 3 theme and Compose components"
 - Consumes: `TodoViewModel`, `TodoUiState`, `TodoItemCard`, `FilterChipRow`, `TodoEmptyState`, `AddTodoBottomSheet`, `TodoDatabase`, `TodoRepositoryImpl`
 - Produces: The full end-to-end runnable Android Todo app.
 
-- [ ] **Step 1: Implement `TodoListScreen.kt`**
+- [x] **Step 1: Implement `TodoListScreen.kt`**
 
 Create `app/src/main/java/com/example/todo/ui/screens/TodoListScreen.kt`:
 ```kotlin
@@ -1847,7 +1847,7 @@ fun TodoListScreen(
 }
 ```
 
-- [ ] **Step 2: Implement `TodoApplication.kt` and `MainActivity.kt`**
+- [x] **Step 2: Implement `TodoApplication.kt` and `MainActivity.kt`**
 
 Create `app/src/main/java/com/example/todo/TodoApplication.kt`:
 ```kotlin
@@ -1900,13 +1900,13 @@ class MainActivity : ComponentActivity() {
 }
 ```
 
-- [ ] **Step 3: Commit completed integration**
+- [x] **Step 3: Commit completed integration**
 
 ```bash
 git add app/src/main/java/com/example/todo/
 git commit -m "feat: connect TodoListScreen, MainActivity, and TodoApplication"
 ```
 
-- [ ] **Step 4: Verify test suite and code compilation**
+- [x] **Step 4: Verify test suite and code compilation**
 
 Run unit tests and verification steps to ensure code integrity across domain, data, and presentation layers.
