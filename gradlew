@@ -180,31 +180,7 @@ if "$cygwin" || "$msys" ; then
 fi
 
 
-# Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
-set -- \
-        "-Dorg.gradle.appname=$APP_BASE_NAME" \
-        -classpath "$CLASSPATH" \
-        org.gradle.wrapper.GradleWrapperMain \
-        "$@"
+# Collect all arguments for the java command, following the shell quoting and substitution rules
+eval "set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS \"-Dorg.gradle.appname=$APP_BASE_NAME\" -classpath \"$CLASSPATH\" org.gradle.wrapper.GradleWrapperMain \"$@\""
 
-# Stop when "xargs" is not available.
-if ! command -v xargs >/dev/null 2>&1
-then
-    die "xargs is not available"
-fi
-
-# Use "xargs" to parse quoted args.
-#
-# With -n1 it outputs one arg per line, with the quotes and backslashes removed.
-#
-# In practice, this will generally do the right thing:
-#   * args including whitespace are handled correctly
-#   * absolute paths are oked
-#   * relative paths aren't
-#
-# For example, the following will fail:
-#   $ test -f "$HOME/Library/Application Support/test"
-#
-# but the following will work fine:
-#   $ test -f $HOME/Library/Application\ Support/test
-exec xargs java "${DEFAULT_JVM_OPTS}" ${JAVA_OPTS} ${GRADLE_OPTS} -jar "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+exec "$JAVACMD" "$@"
